@@ -14,6 +14,12 @@ public class PolynomialFunction extends Function{
 	private ArrayList<Term> polynom;	// Polinomio que defina a la función.
 	
 	public PolynomialFunction() {
+		super();
+		polynom = new ArrayList<Term>();
+	}
+	
+	public PolynomialFunction(Integer left, Integer right) {
+		super(left, right);
 		polynom = new ArrayList<Term>();
 	}
 	

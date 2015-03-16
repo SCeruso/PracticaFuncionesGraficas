@@ -21,8 +21,8 @@ public class GraphicFunctions  extends JPanel{
 	private int cYcoord;						// Coordenada y del centro de ejes.
 	private int left;							// Parte izquierda desde donde se empieza a evaluar las funciones.
 	private int right;							// Parte derecha hasta donde se evaluan las funciones.
-	public final double POINT_DISTANCE = 1;	// Distancia entre puntos en pixeles.
-	public final double SCALE = 100;			// Escala.
+	public final double POINT_DISTANCE = 1;		// Distancia entre puntos en pixeles.
+	public final double SCALE = 50;				// Escala.
 	
 	public GraphicFunctions() {
 		graphicFunction = new Polygon();
@@ -86,19 +86,41 @@ public class GraphicFunctions  extends JPanel{
 		setCxCoord(getWidth() / 2);
 		setCyCoord(getHeight() / 2);
 	}
+	
+	public ArrayList<Function> getFunctions() {
+		return functions;
+	}
+	public void setFunctions(ArrayList<Function> functions) {
+		this.functions = functions;
+	}
+	
+	
 	/**
 	 * Dibuja la función indexada por el índice indxFunction.
 	 * @param indxFunction	Función a dibujar.
 	 */
 	public void drawFunction(int indxFunction) {
 		graphicFunction = new Polygon();
-	
-		for (int i = getLeft(); i < getRight(); i += POINT_DISTANCE) {
-			//if (function != null && (i + getCxCoord()) > 0 && (getCyCoord() -  SCALE * (fvalue = (int)function.f(i)) > 0))
+		int left;
+		int right;
+		
+		if (functions.get(indxFunction).getLeftSide() != null && functions.get(indxFunction).getLeftSide() > getLeft())
+			left = functions.get(indxFunction).getLeftSide();
+		else
+			left = getLeft();
+		
+		if (functions.get(indxFunction).getRightSide() != null && functions.get(indxFunction).getRightSide() < getRight())
+			right = functions.get(indxFunction).getRightSide();
+		else
+			right = getRight();
+		
+		for (int i = left; i <= right; i += POINT_DISTANCE) {
+			
 			if (functions.size() != 0)
 				graphicFunction.addPoint((int) (i + getCxCoord()), (int) (getCyCoord() - functions.get(indxFunction).f(i) * SCALE));
 		}
 	}
+	
 	/**
 	 * Pinta ambos ejes de coordenadas.
 	 * @param g

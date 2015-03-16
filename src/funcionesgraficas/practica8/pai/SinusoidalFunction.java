@@ -9,9 +9,17 @@ package funcionesgraficas.practica8.pai;
 public class SinusoidalFunction extends Function {
 	private double a;		// Amplitud
 	private double w;		// Velocidad angular
-	private double phi;	// Fase
+	private double phi;		// Fase
 	
 	public SinusoidalFunction(double ampl, double omega, double phase) {
+		super();
+		a = ampl;
+		w = omega;
+		phi = phase;
+	}
+	
+	public SinusoidalFunction(double ampl, double omega, double phase, Integer left, Integer right) {
+		super(left, right);
 		a = ampl;
 		w = omega;
 		phi = phase;

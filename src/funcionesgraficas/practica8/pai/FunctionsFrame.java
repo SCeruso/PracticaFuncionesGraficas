@@ -1,4 +1,6 @@
 package funcionesgraficas.practica8.pai;
+import java.util.ArrayList;
+
 /**
  * 
  * @author Sabato Ceruso
@@ -10,13 +12,17 @@ import javax.swing.JFrame;
 
 public class FunctionsFrame extends JFrame{
 	private GraphicFunctions functionsPanel;
+	private ArrayList<Function> functions;
 	
 	public FunctionsFrame() {
+		functions = new ArrayList<Function>();
+		functionsPanel = new GraphicFunctions();
 		
-		SinusoidalFunction fs1 = new SinusoidalFunction(1, 1, 0);
-		SinusoidalFunction fs2 = new SinusoidalFunction(1, 1, 90);
-		functionsPanel = new GraphicFunctions(fs1);
-		functionsPanel.addFunction(fs2);
 		this.add(functionsPanel);
+	}
+	
+	public void addFunction(Function newFunction) {
+		functions.add(newFunction);
+		functionsPanel.setFunctions(functions);
 	}
 }
